@@ -1,0 +1,9 @@
+__pycache__/
+data/audio/
+#data/images/*.png
+data/images/*
+!data/images/.gitkeep
+data/words/wod.json
+venv/
+build/
+dist/
