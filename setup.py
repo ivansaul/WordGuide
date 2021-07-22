@@ -2,10 +2,10 @@ import sys
 from cx_Freeze import setup, Executable
 
 
-includefiles = ['comp/','data/','fonts/','draw_card.py','image_utils.py']
+includefiles = ['comp/','data/','fonts/','main.kv']
 includes = []
 excludes = ['cx_Freeze','pydoc_data','setuptools','distutils']
-packages = []
+packages = ['kivy','kivymd','ffpyplayer']
 
 base = None
 shortcutName = None
@@ -28,7 +28,7 @@ setup(
         'packages': packages,
         'include_files': includefiles}
         }, 
-    executables = [Executable('app.py', 
+    executables = [Executable('main.py', 
     base = base, 
     icon='comp/icon-app.ico', 
     shortcutName = shortcutName, 
