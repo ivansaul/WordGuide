@@ -18,7 +18,7 @@ if sys.platform == "win32":
         for file in files:
             includefiles.append(f'{root}/{file}')
 else:
-    packages = ['kivy','kivymd', 'ffpyplayer']
+    packages = ['kivy','kivymd', 'ffpyplayer','gtts']
     includefiles = ['comp/','data/','fonts/','main.kv']
     excludes = ['cx_Freeze','pydoc_data','setuptools','distutils','tkinter']
 

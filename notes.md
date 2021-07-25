@@ -11,3 +11,14 @@
     ```
 - Add all `dlls` in `root dir (.)`
 - In advanced settings `--collect-submodules ffpyplayer`
+
+## Linux
+### Release v0.1
+- Compile with `cx_Freeze`
+    ```bash
+    pip install cx-Freeze==6.7
+    ```
+- Run    
+    ```bash
+    python setup.py build
+    ```
