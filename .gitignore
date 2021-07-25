@@ -1,5 +1,6 @@
 __pycache__/
 data/audio/
+data/speech/
 #data/images/*.png
 data/images/*
 !data/images/.gitkeep
@@ -8,3 +9,4 @@ data/words/favorites.json
 venv/
 build/
 dist/
+output/

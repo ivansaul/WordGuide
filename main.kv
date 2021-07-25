@@ -107,6 +107,14 @@
         
     
     MDIconButton:
+        pos_hint: {"center_x": 0.5, "center_y": 0.49}
+        icon: "play-speed"
+        user_font_size: "15sp"
+        theme_text_color: "Custom"
+        text_color: [152/255, 136/255, 136/255,1]
+        on_release: root.speech()
+
+    MDIconButton:
         pos_hint: {"center_x": 0.5, "center_y": 0.14}
         icon: "translate"
         user_font_size: "15sp"

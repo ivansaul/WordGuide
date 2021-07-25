@@ -8,6 +8,8 @@ import os
 import json
 import random
 import tarfile
+import requests
+from gtts import gTTS
 from kivy.lang import Builder
 from kivy.core.window import Window
 from kivymd.app import MDApp
@@ -23,6 +25,13 @@ if not os.path.isdir('data/audio'):
     tar = tarfile.open('data/audio.tar.gz')
     tar.extractall(path='data/')
     tar.close()
+
+if not os.path.isdir('data/speech'):
+    os.mkdir('data/speech')
+else:
+    from shutil import rmtree
+    rmtree('data/speech')
+    os.mkdir('data/speech')
 
 if platform in ['linux', 'win', 'macosx']:
     #Window.size = (511,638)
@@ -145,7 +154,37 @@ class MainScreen(MDFloatLayout):
         else:
             self.ids.lbl_eg_en.text = self.examples[self.n][0].capitalize()
 
-      
+    def speech(self):
+        try:
+            request = requests.get(url='http://www.google.com')
+            internet_connection = True
+        except:
+            internet_connection = False
+            
+        if internet_connection:
+            text = self.ids.lbl_eg_en.text
+            
+            if self.trans_es:
+                lang = 'es'
+                link_speech = f'data/speech/{self.word}_{self.n}_es.ogg'
+                if not os.path.isfile(link_speech):
+                    tts = gTTS(text=text, lang=lang)
+                    tts.save(link_speech)
+                sound = SoundLoader.load(link_speech)
+                if sound:
+                    sound.play()  
+            else:
+                lang = 'en'
+                link_speech = f'data/speech/{self.word}_{self.n}_en.ogg'
+                if not os.path.isfile(link_speech):
+                    tts = gTTS(text=text, lang=lang)
+                    tts.save(link_speech)
+                sound = SoundLoader.load(link_speech)
+                if sound:
+                    sound.play()
+        else:
+            toast('Error Internet Disconnected')        
+
     def play_sound(self):
         #pip install ffpyplayer
         #link_us = self.word['us_ogg']

@@ -1,11 +1,26 @@
+'''
+$ python setup.py build
+> https://cx-freeze.readthedocs.io/en/latest/distutils.html
+'''
+
+import os
 import sys
 from cx_Freeze import setup, Executable
 
-
-includefiles = ['comp/','data/','fonts/','main.kv']
 includes = []
-excludes = ['cx_Freeze','pydoc_data','setuptools','distutils']
-packages = ['kivy','kivymd','ffpyplayer']
+excludes = ['cx_Freeze','pydoc_data','setuptools','distutils','tkinter']
+if sys.platform == "win32":
+    packages = ['kivy','kivymd']
+    excludes = ['cx_Freeze','pydoc_data','setuptools','distutils','tkinter','ffpyplayer']
+    includefiles = ['comp/','data/','fonts/','main.kv']
+    #add dlls
+    for root, subdirectories, files in os.walk('dlls'):
+        for file in files:
+            includefiles.append(f'{root}/{file}')
+else:
+    packages = ['kivy','kivymd', 'ffpyplayer']
+    includefiles = ['comp/','data/','fonts/','main.kv']
+    excludes = ['cx_Freeze','pydoc_data','setuptools','distutils','tkinter']
 
 base = None
 shortcutName = None
@@ -29,7 +44,7 @@ setup(
         'include_files': includefiles}
         }, 
     executables = [Executable('main.py', 
-    base = base, 
+    base = base, # "Console", base, # None
     icon='comp/icon-app.ico', 
     shortcutName = shortcutName, 
     shortcutDir = shortcutDir)]
